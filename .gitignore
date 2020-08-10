@@ -1,0 +1,9 @@
+# Don't commit compiled code:
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
