@@ -16,8 +16,8 @@ pub fn draw(text []string, x int, y int) {
 }
 
 pub interface Widget {
-	render(int, int) [][]string
-	get_target_size() (int, int)
+	render(int, int) [][]string		// width, height
+	get_target_size() (int, int)	// width, height
 }
 
 // unfocus()

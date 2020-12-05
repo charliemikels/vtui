@@ -2,6 +2,10 @@ module v_term_ui
 
 pub struct EmptyWidget {}
 
+pub fn new_empty_widget() &EmptyWidget {
+	return &EmptyWidget{}
+}
+
 // PUBLIC FOR TESTING
 pub fn (ew EmptyWidget) render(w int, h int) [][]string {
 	return [][]string{len: h, init: []string{len: w, init: '0'}}
