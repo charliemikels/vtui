@@ -110,7 +110,7 @@ fn (t Table) calc_col_widths(tw int) []int {	// table width
 // }
 
 pub fn (t Table) render(width int, height int) [][]string {
-	mut rendered_table := [][]string{len: height, init: []string{len: width, init:'t'} }
+	mut rendered_table := [][]string{len: height, init: []string{len: width, init:' '} }
 
 	// println('Table data: $t.data')
 	// println('Table size: ${t.get_target_size()}')
@@ -149,16 +149,24 @@ pub fn (t Table) render(width int, height int) [][]string {
 		row_strings.insert(1, header_separator)
 	}
 
-	// TODO: add a exterior border option. (Repurpose Box.render()?).
+	// add space to bottom if our data is too short to fit render height
+	if row_strings.len <= height {
+		mut bottom_space := ''
+		for i, w in column_widths {
+			bottom_space += ' '.repeat(w)
+			if i != column_widths.len-1 { bottom_space += '│' }
+		}
+		for dif in row_strings.len..height { row_strings << bottom_space }
+	}
 
+	// Place results in rendered_table
 	for r, _ in rendered_table {
+		if r >= row_strings.len {break}
 		row_array := string_to_array(row_strings[r])
 		for ch, _ in rendered_table[r] {
 			rendered_table[r][ch] = row_array[ch].str()
 		}
-		println(row_array)
 	}
 
 	return rendered_table
-
 }
