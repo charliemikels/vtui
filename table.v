@@ -107,22 +107,19 @@ fn (t Table) calc_col_widths(tw int) []int {	// table width
 		for _ in 0..dif {
 			building_col_widths[arr.idx_max(building_col_widths)]--
 		}
-		// println(building_col_widths)
 	}
 
+	// if we need to stretch the table...
 	if dif < 0 {
 		dif *= -1
 		mut current_ind := 0
 		for _ in 0..dif {
-			building_col_widths[current_ind++]++
+			building_col_widths[current_ind]++
+			current_ind++
 			if current_ind >= building_col_widths.len { current_ind = 0}
 		}
-		// println(building_col_widths)
 	}
-
-
-
-
+	
 	return building_col_widths
 }
 
