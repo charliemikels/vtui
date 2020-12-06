@@ -1,4 +1,4 @@
-module v_term_ui
+module vtui
 
 pub struct EmptyWidget {}
 

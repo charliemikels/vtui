@@ -1,4 +1,4 @@
-module v_term_ui
+module vtui
 
 // import term
 pub struct Box {
