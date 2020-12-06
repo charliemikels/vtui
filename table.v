@@ -1,5 +1,7 @@
 module v_term_ui
 
+import arrays as arr
+
 struct Table {
 	data              [][]string
 	has_header        bool
@@ -96,7 +98,32 @@ fn (t Table) get_target_size() (int, int) {	// width, height
 
 // TODO: This vvvv
 fn (t Table) calc_col_widths(tw int) []int {	// table width
-	return t.get_ideal_col_widths()
+	mut building_col_widths := t.get_ideal_col_widths()
+	ideal_table_width:= sum(building_col_widths) + building_col_widths.len-1 // sum cols + spacers (last row: no spacer)
+	mut dif := ideal_table_width - tw
+
+	// if we need to shrink the table...
+	if dif > 0 {
+		for _ in 0..dif {
+			building_col_widths[arr.idx_max(building_col_widths)]--
+		}
+		// println(building_col_widths)
+	}
+
+	if dif < 0 {
+		dif *= -1
+		mut current_ind := 0
+		for _ in 0..dif {
+			building_col_widths[current_ind++]++
+			if current_ind >= building_col_widths.len { current_ind = 0}
+		}
+		// println(building_col_widths)
+	}
+
+
+
+
+	return building_col_widths
 }
 
 // fn max_i(a []int) int { // returns the last maximum
@@ -111,30 +138,21 @@ fn (t Table) calc_col_widths(tw int) []int {	// table width
 
 pub fn (t Table) render(width int, height int) [][]string {
 	mut rendered_table := [][]string{len: height, init: []string{len: width, init:' '} }
-
-	// println('Table data: $t.data')
-	// println('Table size: ${t.get_target_size()}')
-	// println('Render size: W: $width H: $height')
-
+	// calculate widths for each column. This dictates the width of the whole table
 	column_widths := t.calc_col_widths(width)
 
-	// println('Col widths: $column_widths')
-
-	mut padded_data := [][]string{ len: t.data.len, init: []string{ len: t.data[0].len, init: ''}}	// like t.data, but with spaces to fit column_widths,
+	// combine cols in a row into one string
 	mut row_strings := []string{len: t.data.len, init: ''}
 
 	for r, row in t.data {
 		for c, col in row {
-			if 			col.len <  column_widths[c] { padded_data[r][c] = (col + ' '.repeat(column_widths[c] - col.len)) }
-			else if col.len == column_widths[c] { padded_data[r][c] = (col) }
+			if 			col.len <  column_widths[c] { row_strings[r] += (col + ' '.repeat(column_widths[c] - col.len)) }
+			else if col.len == column_widths[c] { row_strings[r] += (col) }
 			else if col.len >  column_widths[c] {
-				if 			column_widths[c] > 8 {	padded_data[r][c] = (col[0..column_widths[c] - 3] + '...') }
-				else if column_widths[c] > 4 {	padded_data[r][c] = (col[0..column_widths[c] - 1] + '-') }
-				else 												 {	padded_data[r][c] = (col[0..column_widths[c]]) }
+				if column_widths[c] > 3 {	row_strings[r] += (col[0..column_widths[c] - 1] + '…') }
+				else { row_strings[r] += (col[0..column_widths[c]]) }
 			}
-
-			// merge cols into one row string and add separators
-			row_strings[r] += padded_data[r][c]
+			// sepparators
 			if c != row.len-1 { row_strings[r] += '│' }
 		}
 	}
@@ -149,15 +167,18 @@ pub fn (t Table) render(width int, height int) [][]string {
 		row_strings.insert(1, header_separator)
 	}
 
-	// add space to bottom if our data is too short to fit render height
+	// Add space to bottom if our data is too short to fit render height
 	if row_strings.len <= height {
 		mut bottom_space := ''
 		for i, w in column_widths {
 			bottom_space += ' '.repeat(w)
 			if i != column_widths.len-1 { bottom_space += '│' }
 		}
-		for dif in row_strings.len..height { row_strings << bottom_space }
+		for _ in row_strings.len..height { row_strings << bottom_space }
 	}
+
+	// TODO: Add 'rip' to mark if a table is too large to fit in space??
+
 
 	// Place results in rendered_table
 	for r, _ in rendered_table {
@@ -167,6 +188,5 @@ pub fn (t Table) render(width int, height int) [][]string {
 			rendered_table[r][ch] = row_array[ch].str()
 		}
 	}
-
 	return rendered_table
 }
