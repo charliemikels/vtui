@@ -1,6 +1,7 @@
 module vtui
 
-pub struct EmptyWidget {}
+pub struct EmptyWidget {
+}
 
 pub fn new_empty_widget() &EmptyWidget {
 	return &EmptyWidget{}
