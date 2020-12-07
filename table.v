@@ -123,16 +123,7 @@ fn (t Table) calc_col_widths(tw int) []int { // table width
 	return building_col_widths
 }
 
-// fn max_i(a []int) int { // returns the last maximum
-// mut max_i := 0
-// for i, n in a {
-// if n >= a[max_i] {
-// max_i = i
-// }
-// }
-// return max_i
-// }
-pub fn (t Table) render(width int, height int) [][]string {
+fn (t Table) render(width int, height int) [][]string {
 	mut rendered_table := [][]string{len: height, init: []string{len: width, init: ' '}}
 	// calculate widths for each column. This dictates the width of the whole table
 	column_widths := t.calc_col_widths(width)

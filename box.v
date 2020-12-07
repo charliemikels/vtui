@@ -1,7 +1,7 @@
 module vtui
 
 // import term
-pub struct Box {
+struct Box {
 	title string
 	child []&Widget = [&EmptyWidget{}] // TODO: When interfaces are smarter, change back to child: &Widget
 	/*
@@ -27,7 +27,7 @@ pub fn new_box(c BoxConfig, child &Widget) &Box { // (c BoxConfig/*, child Widge
 }
 
 // PUBLIC FOR TESTING
-pub fn (b Box) render(w int, h int) [][]string {
+fn (b Box) render(w int, h int) [][]string {
 	// linestyle
 	mut style := map[string]string{}
 	style['h'] = '─'
@@ -107,7 +107,7 @@ pub fn (b Box) render(w int, h int) [][]string {
 	return rendered_box
 }
 
-pub fn (b Box) get_target_size() (int, int) {
+fn (b Box) get_target_size() (int, int) {
 	w, h := b.child[0].get_target_size()
 	return w + 2, h + 2
 }

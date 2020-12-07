@@ -6,31 +6,23 @@ import charliemikels.vtui as ui
 
 
 fn main() {
-	ui.start()
+	// ui.start()
 
-	// fn_box := ui.new_box({title: 'Big box'}, ui.new_box({title: 'Small box'}, ui.new_empty_widget() ) )
-	fn_box := ui.new_box({title: 'Table'},
-		ui.new_table({
-			data: [
-				['Name', 'Age', 'Cat or Dog'],
-				['Kevin', '19', 'Cat'],
-				['Derek', '15', 'Dog'],
-				['Daniel', '22', 'Cat'],
-				['Kevin\'s brother', '8', 'FISH']
-			]
-		})
+	window := ui.new_window({},
+		ui.new_box({title: 'Win Test'},
+			ui.new_table({
+				data: [
+					['Name', 'Age', 'Cat or Dog'],
+					['Kevin', '19', 'Cat'],
+					['Derek', '15', 'Dog'],
+					['Daniel', '22', 'Cat'],
+					['Kevin\'s brother', '8', 'FISH']
+				]
+			})
+		)
 	)
 
-	rendered_box := fn_box.render(35,8)
-	// rendered_box := fn_table.render(30,30)
-
-	for row in rendered_box {
-		println("")
-		for char in row {
-			print(char)
-		}
-	}
-	println("")
+	window.draw(40, 30, 0, 0)
 
 	// term.set_cursor_position(1,40)
 
