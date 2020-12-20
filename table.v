@@ -97,7 +97,8 @@ fn (t Table) get_target_size() (int, int) { // width, height
 	return ideal_table_width, ideal_table_height
 }
 
-// TODO: This vvvv
+// calc_col_widths takes the given width of the table and stretches or shrinks
+// the columns to fit this total width.
 fn (t Table) calc_col_widths(tw int) []int { // table width
 	mut building_col_widths := t.get_ideal_col_widths()
 	ideal_table_width := sum(building_col_widths) + building_col_widths.len - 1 // sum cols + spacers (last row: no spacer)

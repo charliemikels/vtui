@@ -6,7 +6,6 @@ import charliemikels.vtui as ui
 
 
 fn main() {
-	// ui.start()
 
 	window := ui.new_window({},
 		ui.new_box({title: 'Win Test'},
@@ -22,8 +21,8 @@ fn main() {
 		)
 	)
 
-	window.draw(40, 30, 0, 0)
+	app := ui.new_app({}, window)
 
-	// term.set_cursor_position(1,40)
+	app.run()
 
 }
