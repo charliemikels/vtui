@@ -3,6 +3,7 @@ module vtui
 import term
 // import time
 
+// Window is in charge of drawing the UI (and managing the layout).
 struct Window {
 	box_characters 	map[string]string
 mut:
