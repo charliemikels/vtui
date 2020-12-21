@@ -1,10 +1,11 @@
-Heads up, I recently discovered that V's built in `term` module basicaly already
+Heads up, I recently discovered that V's built in `term` module basically already
 does what this project was intended to do with `term.ui`.
 See the docs for it [here](https://modules.vlang.io/term.ui.html)
 
 # VTUI
 
-A basic terminal UI system for the V programing language. This is a small hobby project and stuff will change on the fly.
+A basic terminal UI system for the V programing language. This is a small hobby
+project. (Right now,) stuff might and will change on the fly and without warning.
 
 ![](README_assets/demo.png)
 
@@ -16,7 +17,6 @@ Theoretically, these commands should automatically install and update this modul
 ```bash
 v install charliemikels.vtui
 ```
-
 or
 ```bash
 vpkg get github.com/charliemikels/vtui
@@ -27,7 +27,7 @@ Then you can update it with.
 v update
 ```
 
-If you want to do it manually, just clone this repo to `~/.vmodules/charliemikels/vtui` and you should have the same experience.
+If you want to do it manually, just clone this repo to `~/.vmodules/charliemikels/vtui` (or wherever your V modules are stored) and you should have the same experience. 
 
 ## How do I use vtui?
 
@@ -37,4 +37,4 @@ import charliemikels.vtui
 // The rest of your code here...
 ```
 
-Eventually there will be some concept of an App that runs the UI, but not yet.
+See the example directory for the code in action.
