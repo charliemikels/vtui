@@ -5,9 +5,9 @@ module vtui
 struct Row {
 	children []Widget
 	spacing  string = 'even'
-		// even: Every child gets the same space
-		// balanced: Try to prioritize original proportions.
-		// other options???
+	// even: Every child gets the same space
+	// balanced: Try to prioritize original proportions.
+	// other options???
 }
 
 pub struct RowConfig {
