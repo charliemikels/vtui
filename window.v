@@ -7,14 +7,14 @@ import term
 struct Window {
 	box_characters map[string]string
 mut:
-	child          []&Widget // An array due to a bug. When interfaces are smarter, just use &Widget
+	child          []Widget // An array due to a bug. When interfaces are smarter, just use Widget
 }
 
 pub struct WindowConfig {
 }
 
-pub fn new_window(w WindowConfig, child &Widget) &Window {
-	mut widget_list := []&Widget{}
+pub fn new_window(w WindowConfig, child Widget) Window {
+	mut widget_list := []Widget{}
 	widget_list << child
 	mut box_style := map[string]string{}
 	// '─' is 'ew' bc the ends of the line connect to the east and west sides
@@ -38,7 +38,7 @@ pub fn new_window(w WindowConfig, child &Widget) &Window {
 		box_style['nse'] = '|'
 		box_style['nsw'] = '|'
 	}
-	return &Window{
+	return Window{
 		// title: w.title
 		child: widget_list
 		box_characters: box_style
@@ -54,4 +54,8 @@ pub fn (win Window) draw(width int, height int, x_off int, y_off int) {
 			print(rendered_child[h][w])
 		}
 	}
+}
+
+fn (win Window) str() string {
+	return 'Window[......]'
 }

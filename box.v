@@ -3,10 +3,10 @@ module vtui
 // import term
 struct Box {
 	title string
-	child []&Widget = [&EmptyWidget{}] // TODO: When interfaces are smarter, change back to child: &Widget
+	child []Widget = [EmptyWidget{}] // TODO: When interfaces are smarter, change back to child: Widget
 	/*
-	When this was simply `child: &Widget`, V would throw an error basicaly
-			saying it was expecting type &Widget, but instead got type &Box, even
+	When this was simply `child: Widget`, V would throw an error basicaly
+			saying it was expecting type Widget, but instead got type Box, even
 			though Box should count as a Widget. However, wrapping this in a array
 			bypasses this error somehow. Not sure why it was a problem earlier other
 			than the V Discord and vui claiming that interfaces right now are dumb.
@@ -17,16 +17,15 @@ pub struct BoxConfig {
 	title string = 'New Box'
 }
 
-pub fn new_box(c BoxConfig, child &Widget) &Box { // (c BoxConfig/*, child Widget*/)
-	mut widget_list := []&Widget{}
+pub fn new_box(c BoxConfig, child Widget) Box { // (c BoxConfig/*, child Widget*/)
+	mut widget_list := []Widget{}
 	widget_list << child
-	return &Box{
+	return Box{
 		title: c.title
 		child: widget_list
 	}
 }
 
-// PUBLIC FOR TESTING
 fn (b Box) render(w int, h int) [][]string {
 	// linestyle
 	mut style := map[string]string{}
@@ -110,4 +109,8 @@ fn (b Box) render(w int, h int) [][]string {
 fn (b Box) get_target_size() (int, int) {
 	w, h := b.child[0].get_target_size()
 	return w + 2, h + 2
+}
+
+fn (b Box) str() string {
+	return 'Box($b.title)'
 }

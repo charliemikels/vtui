@@ -9,22 +9,22 @@ struct App {
 	// fixed_size_w 	 int
 	// fixed_size_h 	 int
 mut:
-	w              &Window
+	w              Window
 }
 
 pub struct AppConfig {
 	is_interactive bool
 }
 
-pub fn new_app(c AppConfig, win &Window) &App {
+pub fn new_app(c AppConfig, win Window) App {
 	app := App{
 		w: win
 		is_interactive: c.is_interactive
 	}
-	return &app
+	return app
 }
 
-pub fn (mut a App) change_window(win &Window) {
+pub fn (mut a App) change_window(win Window) {
 	a.w = win
 }
 

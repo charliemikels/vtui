@@ -79,14 +79,6 @@ fn string_to_array(s string) []string {
 	return rune_list
 }
 
-fn sum(a []int) int {
-	mut sum := 0
-	for num in a {
-		sum += num
-	}
-	return sum
-}
-
 fn (t Table) get_target_size() (int, int) { // width, height
 	mut ideal_table_width := sum(t.get_ideal_col_widths()) // Sum col widths
 	ideal_table_width += (t.data[0].len - 1) // space between every col "│" (but not last col)
@@ -185,4 +177,8 @@ fn (t Table) render(width int, height int) [][]string {
 		}
 	}
 	return rendered_table
+}
+
+fn (t Table) str() string {
+	return 'Table'
 }
