@@ -7,12 +7,12 @@ import charliemikels.vtui as ui
 
 fn main() {
 
-	window := ui.new_window({},
+	// window := ui.new_window({},
 		// ui.new_box({title: 'Outer Row Test'},		// Removing this gets a C error if new row starts with anything other than a box
-			ui.new_row({}, [
-				// ui.new_empty_widget(),							// Or if you remove both the box above and this empty_widget, it runs fine
-				ui.new_box({title: 'Row Test'},
-					ui.new_empty_widget()
+			// ui.new_row({}, [
+				// ui.new_empty_widget(),
+				// ui.new_box({title: 'Row Test'},
+				// 	ui.new_empty_widget()
 				// // 	// ui.new_table({
 				// // 	// 	data: [
 				// // 	// 		['Fruit', 'Goodness'],
@@ -21,8 +21,8 @@ fn main() {
 				// // 	// 		['Sandwich', 'Not a fruit but still good'],
 				// // 	// 	]
 				// // 	// })
-				),
-				// //
+				// )
+				//
 				// ui.new_empty_widget(),
 				// // ui.new_table({
 				// // 	data: [
@@ -33,15 +33,21 @@ fn main() {
 				// // 		['Kevin\'s brother', 'Yes']
 				// // 	]
 				// })
-			])
-		// )		// outer box ends here.
-	)
-
-	app := ui.new_app({}, window)
+				// ])
+				// )		// outer box ends here.
+				// )
+	// app := ui.new_app({}, window)
 	// app := ui.new_app({},
 	// )
+	// app.run()
 
+	// DEBUG vvvv
 
-	app.run()
+	// only_ew						:= ui.new_row({}, [ui.new_empty_widget()]) // works fine
+	box_after_ew			:= ui.new_row({}, [ui.new_empty_widget(), ui.new_box({}, ui.new_empty_widget() )])		// Only works if box_before_ew is uncommented.
+	box_before_ew			:= ui.new_row({}, [ui.new_box({}, ui.new_empty_widget() ), ui.new_empty_widget()])		// works fine
+	// bow_wrapping_row	:= ui.new_box({}, ui.new_row({}, [ui.new_empty_widget()]) )														// works fine
+
+	// DEBUG ^^^^
 
 }
