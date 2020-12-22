@@ -3,20 +3,25 @@ module vtui
 // Row takes a list of children and orders them left to right.
 // TODO: Use spacing to control distribution
 struct Row {
-	children []Widget
-	spacing  string = 'even'
-	// even: Every child gets the same space
-	// balanced: Try to prioritize original proportions.
+	children [][]Widget
+	spacing  string
+	// 'even'			Every child gets the same space
+	// 'balanced' Try to prioritize original proportions.
 	// other options???
 }
 
 pub struct RowConfig {
-	// spacing string
+	spacing string = 'even'
 }
 
 pub fn new_row(c RowConfig, children_list []Widget) Row {
+	mut wrapped_children_list := [][]Widget{}
+	for child in children_list{
+		wrapped_children_list << [child]
+	}
 	row := Row{
-		children: children_list
+		children: wrapped_children_list
+		spacing: c.spacing
 	}
 	return row
 }
@@ -24,7 +29,7 @@ pub fn new_row(c RowConfig, children_list []Widget) Row {
 fn (r Row) get_target_size() (int, int) {
 	mut w, mut h := 0, 0
 	for child in r.children {
-		current_w, current_h := child.get_target_size()
+		current_w, current_h := child[0].get_target_size()
 		w += current_w
 		if h < current_h {
 			h = current_h
@@ -52,7 +57,7 @@ fn (r Row) render(w int, h int) [][]string {
 		}
 	}
 	for i, child in r.children {
-		rendered_child := child.render(cell_widths[i], h)
+		rendered_child := child[0].render(cell_widths[i], h)
 		current_low := match i {
 			0 { '0'.int() } // TODO: 0 on it's own is an any_int, incompatable in a match with int (the else). Fix later
 			else { sum(cell_widths[0..i]) }
