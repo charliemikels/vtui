@@ -1,9 +1,10 @@
 module vtui
 
 // import term
+
 struct Box {
 	title string
-	child []Widget = [EmptyWidget{}] // TODO: When interfaces are smarter, change back to child: Widget
+	child []Widget // TODO: When interfaces are smarter, change back to child: Widget
 	/*
 	When this was simply `child: Widget`, V would throw an error basicaly
 			saying it was expecting type Widget, but instead got type Box, even
@@ -22,7 +23,7 @@ pub fn new_box(c BoxConfig, child Widget) Box { // (c BoxConfig/*, child Widget*
 	widget_list << child
 	return Box{
 		title: c.title
-		child: widget_list
+		// child: widget_list
 	}
 }
 
@@ -111,6 +112,6 @@ fn (b Box) get_target_size() (int, int) {
 	return w + 2, h + 2
 }
 
-fn (b Box) str() string {
+fn (b Box) to_string() string {
 	return 'Box($b.title)'
 }

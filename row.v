@@ -14,7 +14,11 @@ pub struct RowConfig {
 	spacing string = 'even'
 }
 
-pub fn new_row(c RowConfig, children_list []Widget) Row {
+pub fn new_row(c RowConfig, children ...Widget) Widget {
+	mut children_list := []Widget{}
+	for child in children {
+		children_list << child
+	}
 	row := Row {
 		// children: children_list
 		spacing: c.spacing
@@ -68,6 +72,7 @@ fn (r Row) render(w int, h int) [][]string {
 	return rendered_row
 }
 
-fn (r Row) str() string {
-	return 'Row($r.children.len children)'
+fn (r Row) to_string() string {
+	// return 'Row($r.children.len children)'
+	return 'Row'
 }

@@ -21,7 +21,7 @@ pub struct TableConfig {
 	// has_borders     bool
 }
 
-pub fn new_table(c TableConfig) Table {
+pub fn new_table(c TableConfig) Widget {
 	t := Table{
 		data: c.data
 		has_header: c.has_header
@@ -179,6 +179,6 @@ fn (t Table) render(width int, height int) [][]string {
 	return rendered_table
 }
 
-fn (t Table) str() string {
+fn (t Table) to_string() string {
 	return 'Table'
 }

@@ -56,6 +56,6 @@ pub fn (win Window) draw(width int, height int, x_off int, y_off int) {
 	}
 }
 
-fn (win Window) str() string {
+fn (win Window) to_string() string {
 	return 'Window[......]'
 }
