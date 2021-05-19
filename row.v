@@ -3,7 +3,7 @@ module vtui
 // Row takes a list of children and orders them left to right.
 // TODO: Use spacing to control distribution
 struct Row {
-	children []Widget = [EmptyWidget{}]
+	children []Widget = [ EmptyWidget{} ]
 	spacing  string
 	// 'even'			Every child gets the same space
 	// 'balanced' Try to prioritize original proportions.
@@ -14,13 +14,9 @@ pub struct RowConfig {
 	spacing string = 'even'
 }
 
-pub fn new_row(c RowConfig, children ...Widget) Widget {
-	mut children_list := []Widget{}
-	for child in children {
-		children_list << child
-	}
+pub fn new_row(c RowConfig, children []Widget) Row {
 	row := Row {
-		// children: children_list
+		children: children
 		spacing: c.spacing
 	}
 	return row

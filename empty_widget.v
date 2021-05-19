@@ -1,13 +1,12 @@
 module vtui
 
-pub struct EmptyWidget {
+struct EmptyWidget {
 }
 
 pub fn new_empty_widget() Widget {
 	return EmptyWidget{}
 }
 
-// PUBLIC FOR TESTING
 fn (ew EmptyWidget) render(w int, h int) [][]string {
 	return [][]string{len: h, init: []string{len: w, init: ' '}}
 }
