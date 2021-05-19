@@ -6,7 +6,6 @@ interface Widget {
 	get_target_size() (int, int) // width, height
 	to_string() string // for debug println
 	// str() string // for debug println
-
 }
 
 fn sum(a []int) int {

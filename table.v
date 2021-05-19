@@ -43,7 +43,7 @@ fn (t Table) get_ideal_col_widths() []int {
 
 // string_to_array converts a string into an array of strings, but it also
 // respects potential utf8 characters.
-// TODO: Set to return []rune] instead of []string
+// TODO: Set to return []rune instead of []string
 fn string_to_array(s string) []string {
 	mut rune_list := []string{}
 	mut rune_builder := []byte{}
@@ -120,14 +120,14 @@ fn (t Table) render(width int, height int) [][]string {
 	mut rendered_table := [][]string{len: height, init: []string{len: width, init: ' '}}
 	// calculate widths for each column. This dictates the width of the whole table
 	column_widths := t.calc_col_widths(width)
-	// combine cols in a row into one string
+	// Ccombine cols in a row into one string
 	mut row_strings := []string{len: t.data.len, init: ''}
 	for r, row in t.data {
 		for c, col in row {
 			if col.len < column_widths[c] {
 				row_strings[r] += (col + ' '.repeat(column_widths[c] - col.len))
 			} else if col.len == column_widths[c] {
-				row_strings[r] += (col)
+				row_strings[r] += col
 			} else if col.len > column_widths[c] {
 				if column_widths[c] > 3 {
 					row_strings[r] += (col[0..column_widths[c] - 1] + '…')
@@ -135,7 +135,7 @@ fn (t Table) render(width int, height int) [][]string {
 					row_strings[r] += (col[0..column_widths[c]])
 				}
 			}
-			// sepparators
+			// Horizontal Sepparators. Don't append to last element.
 			if c != row.len - 1 {
 				row_strings[r] += '│'
 			}

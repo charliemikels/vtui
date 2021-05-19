@@ -3,7 +3,7 @@ module vtui
 // Row takes a list of children and orders them left to right.
 // TODO: Use spacing to control distribution
 struct Row {
-	children []Widget = [ EmptyWidget{} ]
+	children []Widget = [EmptyWidget{}]
 	spacing  string
 	// 'even'			Every child gets the same space
 	// 'balanced' Try to prioritize original proportions.
@@ -15,7 +15,7 @@ pub struct RowConfig {
 }
 
 pub fn new_row(c RowConfig, children []Widget) Row {
-	row := Row {
+	row := Row{
 		children: children
 		spacing: c.spacing
 	}
@@ -39,7 +39,7 @@ fn (r Row) render(w int, h int) [][]string {
 	mut cell_widths := []int{len: r.children.len}
 	match r.spacing {
 		'even' {
-			base_width := w / r.children.len	// TODO: Possible divide by 0 error here.
+			base_width := w / r.children.len // TODO: Possible divide by 0 error here.
 			mut remaining_space := w % r.children.len
 			for i in 0 .. r.children.len {
 				cell_widths[i] += base_width

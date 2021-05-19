@@ -7,7 +7,7 @@ import term
 struct Window {
 	box_characters map[string]string
 mut:
-	child          Widget
+	child Widget
 }
 
 pub struct WindowConfig {
