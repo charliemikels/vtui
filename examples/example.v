@@ -14,6 +14,15 @@ fn main() {
 			]
 		)),
 	]))
+
+	// window := ui.new_window({},
+	// 	ui.new_box({ title: 'Box' },
+	// 		ui.new_box({ title: 'box 2' },
+	// 			ui.new_empty_widget()
+	// 		)
+	// 	)
+	// )
+
 	app := ui.new_app({}, window)
 	app.run()
 }

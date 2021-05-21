@@ -65,7 +65,7 @@ fn string_to_array(s string) []string {
 				rune_builder = []
 			}
 		} else {
-			rune_list << ch.str()
+			rune_list << rune(ch).str()
 		}
 	}
 	// if rune_list.len != utf8.len(s) {

@@ -71,7 +71,7 @@ fn (b Box) render(w int, h int) [][]string {
 		for i, chr in b.title {
 			// println('$i, $chr, $w')
 			if i + i_start < w - 1 {
-				rendered_box[0][i + i_start] = chr.str()
+				rendered_box[0][i + i_start] = rune(chr).str()
 			} else {
 				break
 			}
