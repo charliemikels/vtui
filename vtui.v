@@ -1,4 +1,5 @@
 module vtui
+
 // import term
 
 interface Widget {
