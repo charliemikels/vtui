@@ -9,7 +9,7 @@ struct App {
 	// fixed_size_w 	 int
 	// fixed_size_h 	 int
 mut:
-	w              Window
+	w Window
 }
 
 pub struct AppConfig {
