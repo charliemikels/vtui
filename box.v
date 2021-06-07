@@ -22,10 +22,10 @@ fn (b Box) render(w int, h int) [][]string {
 	// linestyle
 	mut style := map[string]string{}
 	style['h'] = '─'
-	style['v'] = '│' // ┌─┤Title├─────┐
-	style['nw'] = '┌' // │             │
-	style['ne'] = '┐' // └─────────────┘
-	style['sw'] = '└'
+	style['v'] = '│'
+	style['nw'] = '┌' // ┌┤Title├────┐
+	style['ne'] = '┐' // │           │
+	style['sw'] = '└' // └───────────┘
 	style['se'] = '┘'
 	style['title_l'] = '┤'
 	style['title_r'] = '├'
